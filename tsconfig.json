@@ -3,7 +3,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "declarationDir": "dist",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "files": ["src/amg-micro-fe-base-app.tsx"],
   "include": ["src/**/*"],

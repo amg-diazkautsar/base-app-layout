@@ -1,6 +1,6 @@
-import './style/index.css'
+import './style/index.css?modules=false'
 
-import React from "react"
+import React from 'react'
 
 export default function RootComponent (props) {
   return (

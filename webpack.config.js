@@ -1,5 +1,4 @@
-const { merge } = require("webpack-merge");
-const webpack = require('webpack')
+const { mergeWithRules } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
 
 module.exports = (webpackConfigEnv, argv) => {
@@ -10,7 +9,15 @@ module.exports = (webpackConfigEnv, argv) => {
     argv,
   });
 
-  return merge(defaultConfig, {
+  const config = mergeWithRules({
+    module: {
+      rules: {
+        test: "match",
+        use: "replace",
+      },
+    },
+  })(defaultConfig, {
+    // customize the webpack config here
     module: {
       rules: [
         {
@@ -25,22 +32,20 @@ module.exports = (webpackConfigEnv, argv) => {
           },
         },
         {
-          test: /\.css$/,
+          test: /\.css$/i,
           use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1, // Ensure that PostCSS is processed
-              },
-            },
-            'postcss-loader', // Ensure PostCSS is used to process CSS
+            require.resolve("style-loader", {
+              paths: [require.resolve("webpack-config-single-spa-react-ts")],
+            }),
+            require.resolve("css-loader", {
+              paths: [require.resolve("webpack-config-single-spa-react-ts")],
+            }),
+            "postcss-loader",
           ],
-        }
+        },
       ],
-    }, 
-    plugins: [
-      new webpack.optimize.ModuleConcatenationPlugin(),
-    ],
+    },
   });
+
+  return config;
 };
