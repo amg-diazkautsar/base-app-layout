@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "AMG - Base App Micro Front End",
   "scripts": {
-    "start:dev": "webpack serve --port 7501"
+    "start:dev": "webpack serve --port 7501",
+    "build:microfe": "webpack --mode=production"
   },
   "dependencies": {
     "apexcharts": "^3.53.0",

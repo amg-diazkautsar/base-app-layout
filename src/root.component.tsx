@@ -1,11 +1,10 @@
+import App from './App'
 import './style/index.css?modules=false'
 
-import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 export default function RootComponent (props) {
-  return (
-    <>
-      <div className="text-red-600"> TEST </div>
-    </>
-  )
+  return <Router>
+    <App />
+  </Router>
 }
